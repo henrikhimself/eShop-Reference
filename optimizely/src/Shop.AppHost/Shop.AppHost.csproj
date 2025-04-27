@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.1.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Hj.Shop</RootNamespace>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>fddcb4e8-768f-4793-b029-9c87f3ebbe0b</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Hj.Shared" />
+    <Using Include="Hj.Shop.Config" />
+    <Using Include="Hj.Shop" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\src\Basket.Api\Basket.Api.csproj" />
+    <ProjectReference Include="..\..\..\shared\src\IdentityServer.Web\IdentityServer.Web.csproj" />
+    <ProjectReference Include="..\..\..\shared\src\Profile.Api\Profile.Api.csproj" />
+    <ProjectReference Include="..\Commerce.Web\Commerce.Web.csproj" />
+    <ProjectReference Include="..\Migration.App\Migration.App.csproj" />
+    <ProjectReference Include="..\Shop.ServiceDefaults\Shop.ServiceDefaults.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\Shop1.Web\Shop1.Web.csproj" />
+  </ItemGroup>
+</Project>

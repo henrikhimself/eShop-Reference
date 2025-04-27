@@ -1,0 +1,43 @@
+﻿@page
+@model Hj.IdentityServer.Pages.Account.Login.Index
+
+<p>
+  Users
+</p>
+<form asp-page="/Account/Login/Index">
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.ReturnUrl" />
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.Username" value="bob" />
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.Password" value="bob" />
+  <button id="@Guid.NewGuid()" name="Input.Button" value="login">Bob</button>
+</form>
+<br />
+<form asp-page="/Account/Login/Index">
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.ReturnUrl" />
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.Username" value="admin" />
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.Password" value="admin" />
+  <button id="@Guid.NewGuid()" name="Input.Button" value="login">WebAdmin</button>
+</form>
+<br />
+<form asp-page="/Account/Login/Index">
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.ReturnUrl" />
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.Username" value="editor" />
+  <input id="@Guid.NewGuid()" type="hidden" asp-for="Input.Password" value="editor" />
+  <button id="@Guid.NewGuid()" name="Input.Button" value="login">WebEditor</button>
+</form>
+<br/>
+
+<p>
+  Login
+</p>
+<partial name="_ValidationSummary" />
+<form asp-page="/Account/Login/Index">
+  <input type="hidden" asp-for="Input.ReturnUrl" />
+  <p>
+    <input asp-for="Input.Username" placeholder="User name" autofocus>
+  </p>
+  <p>
+    <input type="password" asp-for="Input.Password" placeholder="Password" autocomplete="off">
+  </p>
+  <button name="Input.Button" value="login">Login</button>
+  <button name="Input.Button" value="cancel">Cancel</button>
+</form>

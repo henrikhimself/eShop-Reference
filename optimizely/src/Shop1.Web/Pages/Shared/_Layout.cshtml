@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop.Web</title>
+</head>
+<body>
+  <p>
+    Shop
+    | <a asp-page="/Index">Index</a>
+    | <a asp-page="/Profile">Profile</a>
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    {
+      <text>|</text> <a asp-page="/Logout">Log out</a>
+    }
+    <hr />
+  </p>
+  @RenderBody()
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿@page
+@using Microsoft.AspNetCore.Authentication
+@model Hj.Shop1.Pages.ProfileModel
+@{
+  var claims = User.Claims.Select(x => $"{x.Type}: {x.Value}").Order();
+  var authItems = (await HttpContext.AuthenticateAsync()).Properties!.Items.Select(x => $"{x.Key}: {x.Value}").Order();
+  var identities = Model.Identity?.Order();
+
+  var profileClaims = Model.Profile?.Claims?.Order();
+  var profileAuthItems = Model.Profile?.AuthItems?.Order();
+  var profileIdentities = Model.Profile?.Identity?.Order();
+}
+
+<h2>Identity</h2>
+<table border="1" style="table-layout: fixed; width: 100%;">
+  <tr>
+    <td>User</td>
+    <td>Profile</td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; word-break: break-all;">
+      @if (identities != null)
+      {
+        @foreach (var identity in identities)
+        {
+          <p style="margin-bottom: 2px">@identity</p>
+        }
+      }
+    </td>
+    <td style="vertical-align: top; word-break: break-all;">
+      @if (profileIdentities != null)
+      {
+        @foreach (var profileIdentity in profileIdentities)
+        {
+          <p style="margin-bottom: 2px">@profileIdentity</p>
+        }
+      }
+    </td>
+  </tr>
+</table>
+
+<h2>Claims</h2>
+<table border="1" style="table-layout: fixed; width: 100%;">
+  <tr>
+    <td>User</td>
+    <td>Profile</td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; word-break: break-all;">
+      @if (claims != null)
+      {
+        @foreach (var claim in claims)
+        {
+          <p style="margin-bottom: 2px">@claim</p>
+        }
+      }
+    </td>
+    <td style="vertical-align: top; word-break: break-all;">
+      @if (profileClaims != null)
+      {
+        @foreach (var profileClaim in profileClaims)
+        {
+          <p style="margin-bottom: 2px">@profileClaim</p>
+        }
+      }
+    </td>
+  </tr>
+</table>
+
+<h2>Properties</h2>
+<table border="1" style="table-layout: fixed; width: 100%;">
+  <tr>
+    <td>User</td>
+    <td>Profile</td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; word-break: break-all;">
+      @if (authItems != null)
+      {
+        @foreach (var authItem in authItems)
+        {
+          <p style="margin-bottom: 2px">@authItem</p>
+        }
+      }
+    </td>
+    <td style="vertical-align: top; word-break: break-all;">
+      @if (profileAuthItems != null)
+      {
+        @foreach (var profileAuthItem in profileAuthItems)
+        {
+          <p style="margin-bottom: 2px">@profileAuthItem</p>
+        }
+      }
+    </td>
+  </tr>
+</table>
