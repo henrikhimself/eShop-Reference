@@ -3,7 +3,7 @@ using EPiServer.Events.Providers;
 
 namespace Hj.Commerce.Features.Messaging;
 
-public class EmulatorEventProvider : EventProvider
+internal class EmulatorEventProvider : EventProvider
 {
   public override void SendMessage(EventMessage message)
   {

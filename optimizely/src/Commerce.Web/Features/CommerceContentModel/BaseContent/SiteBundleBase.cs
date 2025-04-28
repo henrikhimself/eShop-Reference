@@ -3,7 +3,7 @@ using EPiServer.Commerce.Catalog.ContentTypes;
 
 namespace Hj.Commerce.Features.CommerceContentModel.BaseContent;
 
-public abstract class SiteBundleBase : BundleContent
+internal abstract class SiteBundleBase : BundleContent
 {
   [CultureSpecific]
   [Display(

@@ -1,6 +1,4 @@
 using Hj.DataProtection;
-using Hj.Shared;
-using Hj.Shop;
 
 namespace Hj.Migration;
 
@@ -13,7 +11,7 @@ internal sealed class DataProtectionResource
   public void Execute()
   {
     var dataProtectionDbContextOptions
-      = _sqlServerHelper.GetDbContextOptions<DataProtectionDbContext>(ServiceName.SqlServer, SharedServiceName.DataProtectionDb);
+      = _sqlServerHelper.GetDbContextOptions<DataProtectionDbContext>(ServiceName.SqlServer, CommonServiceName.DataProtectionDb);
     using var dataProtectionDbContext = new DataProtectionDbContext(dataProtectionDbContextOptions);
     dataProtectionDbContext.Database.EnsureDeleted();
     dataProtectionDbContext.Database.EnsureCreated();

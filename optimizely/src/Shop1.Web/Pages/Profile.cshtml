@@ -1,14 +1,14 @@
 ﻿@page
 @using Microsoft.AspNetCore.Authentication
-@model Hj.Shop1.Pages.ProfileModel
+@model Hj.Shop1.Pages.Profile
 @{
   var claims = User.Claims.Select(x => $"{x.Type}: {x.Value}").Order();
   var authItems = (await HttpContext.AuthenticateAsync()).Properties!.Items.Select(x => $"{x.Key}: {x.Value}").Order();
   var identities = Model.Identity?.Order();
 
-  var profileClaims = Model.Profile?.Claims?.Order();
-  var profileAuthItems = Model.Profile?.AuthItems?.Order();
-  var profileIdentities = Model.Profile?.Identity?.Order();
+  var profileClaims = Model.ProfileDto?.Claims?.Order();
+  var profileAuthItems = Model.ProfileDto?.AuthItems?.Order();
+  var profileIdentities = Model.ProfileDto?.Identity?.Order();
 }
 
 <h2>Identity</h2>

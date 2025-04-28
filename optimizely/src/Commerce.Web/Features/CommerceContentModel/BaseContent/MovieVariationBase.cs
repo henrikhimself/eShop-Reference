@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hj.Commerce.Features.CommerceContentModel.BaseContent;
 
-public abstract class MovieVariationBase : SiteVariationBase
+internal abstract class MovieVariationBase : SiteVariationBase
 {
   [Display(
     Name = "Release Year",

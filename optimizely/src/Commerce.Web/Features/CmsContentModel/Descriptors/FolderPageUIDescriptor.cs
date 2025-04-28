@@ -3,7 +3,7 @@ using EPiServer.Shell;
 namespace Hj.Commerce.Features.CmsContentModel.Descriptors;
 
 [UIDescriptorRegistration]
-public class FolderPageUIDescriptor : UIDescriptor<FolderPage>
+internal class FolderPageUIDescriptor : UIDescriptor<FolderPage>
 {
   public FolderPageUIDescriptor()
        : base(ContentTypeCssClassNames.Container)

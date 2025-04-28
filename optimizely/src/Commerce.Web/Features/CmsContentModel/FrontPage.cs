@@ -7,7 +7,7 @@ namespace Hj.Commerce.Features.CmsContentModel;
 [ContentType(
   DisplayName = "Frontpage",
   GUID = "3c952f63-1e40-4288-8545-548ce6d103d4")]
-public class FrontPage : SitePageBase
+internal class FrontPage : SitePageBase
 {
   [CultureSpecific]
   [Display(

@@ -2,7 +2,7 @@ using System.Text.Json.Nodes;
 
 namespace Hj.Shop.Config;
 
-internal sealed class AzureServiceBusConfig
+internal static class AzureServiceBusConfig
 {
   internal static void Configure(JsonNode configJson)
   {

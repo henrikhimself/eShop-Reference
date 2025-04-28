@@ -1,10 +1,10 @@
 using System.Security.Claims;
+using Hj.Common.Authentication;
 using Hj.ServiceClient.Profile;
-using Hj.Shared.Authentication;
 
 namespace Hj.Commerce.Features.Profile;
 
-public class ProfileService : IProfileService
+internal class ProfileService : IProfileService
 {
   private readonly IProfileClientV1 _profileClientV1;
 

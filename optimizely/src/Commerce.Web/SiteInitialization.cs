@@ -7,7 +7,7 @@ namespace Hj.Commerce;
 
 [InitializableModule]
 [ModuleDependency(typeof(InitializationModule))]
-public class SiteInitialization : IInitializableModule
+internal class SiteInitialization : IInitializableModule
 {
   public void Initialize(InitializationEngine context)
   {

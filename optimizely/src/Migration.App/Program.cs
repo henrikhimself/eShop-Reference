@@ -1,4 +1,4 @@
-using Hj.Shop;
+using Hj.Migration;
 using Microsoft.AspNetCore.Identity;
 
 var builder = Host.CreateDefaultBuilder(args)

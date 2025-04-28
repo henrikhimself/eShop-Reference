@@ -8,7 +8,7 @@ namespace Hj.Commerce.Features.CommerceContentModel;
   DisplayName = "Digital",
   GUID = "58cd9ed8-2420-4177-8494-763cc3b667ae",
   MetaClassName = nameof(MovieDigitalVariation))]
-public class MovieDigitalVariation : MovieVariationBase
+internal class MovieDigitalVariation : MovieVariationBase
 {
   [Display(
     Name = "EntitlementKey",

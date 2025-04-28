@@ -6,11 +6,6 @@ namespace Hj.Shop;
 /// </summary>
 public static class ServiceName
 {
-  /// <summary>
-  /// Base prefix for namespacing externally visible names used in the solution.
-  /// </summary>
-  private const string SolutionName = "optimizely-eshop";
-
   public const string SqlServer = $"{SolutionName}-sqlserver";
   public const string SqlServerVolume = $"{SolutionName}-sqlserver-data";
 
@@ -27,4 +22,9 @@ public static class ServiceName
   public const string CommerceWebCommerceDb = $"{CommerceWeb}-db-commerce";
 
   public const string Shop1Web = "shop1-web";
+
+  /// <summary>
+  /// Base prefix for namespacing externally visible names used in the solution.
+  /// </summary>
+  private const string SolutionName = "optimizely-eshop";
 }

@@ -3,7 +3,7 @@ using Hj.ServiceClient.Profile;
 
 namespace Hj.Commerce.Features.Profile;
 
-public interface IProfileService
+internal interface IProfileService
 {
   Task<ProfileOutputDto?> GetProfileAsync(ClaimsPrincipal? claimsPrincipal);
 }

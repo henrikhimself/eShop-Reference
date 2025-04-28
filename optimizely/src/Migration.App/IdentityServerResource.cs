@@ -3,8 +3,7 @@ using Duende.IdentityServer.EntityFramework.Mappers;
 using Duende.IdentityServer.EntityFramework.Options;
 using Duende.IdentityServer.Models;
 using Hj.IdentityServer;
-using Hj.Shared;
-using Hj.Shop;
+using Hj.IdentityServer.CustomIdentityResource;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,10 +32,21 @@ internal sealed class IdentityServerResource
     EnsureIdentityDb();
   }
 
+  private static void AddRoles(AspNetIdentityDbContext dbContext)
+  {
+    dbContext.AddRole(Authentication.RoleWebEditors);
+    dbContext.AddRole(Authentication.RoleWebAdmins);
+    dbContext.AddRole(Authentication.RoleCommerceSettingsAdmins);
+    dbContext.AddRole(Authentication.RoleCatalogManagers);
+    dbContext.AddRole(Authentication.RoleCommerceAdmins);
+
+    dbContext.SaveChanges();
+  }
+
   private void EnsureConfigurationDb()
   {
     var dbContextOptions
-      = _sqlServerHelper.GetDbContextOptions<ConfigurationDbContext>(ServiceName.SqlServer, SharedServiceName.IdentityServerConfigurationDb);
+      = _sqlServerHelper.GetDbContextOptions<ConfigurationDbContext>(ServiceName.SqlServer, CommonServiceName.IdentityServerConfigurationDb);
     using var dbContext = new ConfigurationDbContext(dbContextOptions);
     dbContext.StoreOptions = new ConfigurationStoreOptions();
     dbContext.Database.EnsureCreated();
@@ -51,7 +61,7 @@ internal sealed class IdentityServerResource
   private void EnsurePersistedGrantDb()
   {
     var dbContextOptions
-      = _sqlServerHelper.GetDbContextOptions<PersistedGrantDbContext>(ServiceName.SqlServer, SharedServiceName.IdentityServerPersistedGrantDb);
+      = _sqlServerHelper.GetDbContextOptions<PersistedGrantDbContext>(ServiceName.SqlServer, CommonServiceName.IdentityServerPersistedGrantDb);
     using var dbContext = new PersistedGrantDbContext(dbContextOptions);
     dbContext.StoreOptions = new OperationalStoreOptions();
     dbContext.Database.EnsureCreated();
@@ -60,7 +70,7 @@ internal sealed class IdentityServerResource
   private void EnsureIdentityDb()
   {
     var dbContextOptions
-      = _sqlServerHelper.GetDbContextOptions<AspNetIdentityDbContext>(ServiceName.SqlServer, SharedServiceName.IdentityServerIdentityDb);
+      = _sqlServerHelper.GetDbContextOptions<AspNetIdentityDbContext>(ServiceName.SqlServer, CommonServiceName.IdentityServerIdentityDb);
     using var dbContext = new AspNetIdentityDbContext(dbContextOptions);
     dbContext.Database.EnsureCreated();
 
@@ -78,8 +88,8 @@ internal sealed class IdentityServerResource
   {
     // Add OpenID Connect web client for the following service names:
     string[] serviceNames = [
-      SharedServiceName.BasketApi,
-      SharedServiceName.ProfileApi,
+      CommonServiceName.BasketApi,
+      CommonServiceName.ProfileApi,
       ServiceName.CommerceWeb,
       ServiceName.Shop1Web];
 
@@ -93,21 +103,10 @@ internal sealed class IdentityServerResource
 
     dbContext.IdentityResources.Add(new IdentityResources.OpenId().ToEntity());
     dbContext.IdentityResources.Add(new IdentityResources.Email().ToEntity());
-    dbContext.IdentityResources.Add(new CustomIdentityResource.Role().ToEntity());
+    dbContext.IdentityResources.Add(new Role().ToEntity());
 
-    dbContext.ApiScopes.Add(new ApiScope(SharedServiceName.BasketApi).ToEntity());
-    dbContext.ApiScopes.Add(new ApiScope(SharedServiceName.ProfileApi).ToEntity());
-
-    dbContext.SaveChanges();
-  }
-
-  private static void AddRoles(AspNetIdentityDbContext dbContext)
-  {
-    dbContext.AddRole(Authentication.Role_WebEditors);
-    dbContext.AddRole(Authentication.Role_WebAdmins);
-    dbContext.AddRole(Authentication.Role_CommerceSettingsAdmins);
-    dbContext.AddRole(Authentication.Role_CatalogManagers);
-    dbContext.AddRole(Authentication.Role_CommerceAdmins);
+    dbContext.ApiScopes.Add(new ApiScope(CommonServiceName.BasketApi).ToEntity());
+    dbContext.ApiScopes.Add(new ApiScope(CommonServiceName.ProfileApi).ToEntity());
 
     dbContext.SaveChanges();
   }
@@ -124,22 +123,26 @@ internal sealed class IdentityServerResource
     });
 
     // Optimizely CMS admin
-    dbContext.AddUser(user =>
-    {
-      user.UserName = "admin";
-      user.PasswordHash = _passwordHasher.HashPassword(user, "admin");
-      user.Email = "admin@localhost";
-      user.EmailConfirmed = true;
-    }, [Authentication.Role_WebAdmins]);
+    dbContext.AddUser(
+      user =>
+      {
+        user.UserName = "admin";
+        user.PasswordHash = _passwordHasher.HashPassword(user, "admin");
+        user.Email = "admin@localhost";
+        user.EmailConfirmed = true;
+      },
+      [Authentication.RoleWebAdmins]);
 
     // Optimizely CMS editor
-    dbContext.AddUser(user =>
-    {
-      user.UserName = "editor";
-      user.PasswordHash = _passwordHasher.HashPassword(user, "editor");
-      user.Email = "editor@localhost";
-      user.EmailConfirmed = true;
-    }, [Authentication.Role_WebEditors]);
+    dbContext.AddUser(
+      user =>
+      {
+        user.UserName = "editor";
+        user.PasswordHash = _passwordHasher.HashPassword(user, "editor");
+        user.Email = "editor@localhost";
+        user.EmailConfirmed = true;
+      },
+      [Authentication.RoleWebEditors]);
 
     _ = dbContext.SaveChanges();
   }

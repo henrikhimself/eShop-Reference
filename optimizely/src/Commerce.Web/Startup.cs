@@ -9,15 +9,13 @@ using Hj.Commerce.Infrastructure.Authentication;
 using Hj.DataProtection;
 using Hj.MessagingAzure;
 using Hj.ServiceClient;
-using Hj.Shared;
-using Hj.Shop;
 using Mediachase.Commerce.Anonymous;
 using Microsoft.Extensions.Azure;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Hj.Commerce;
 
-public class Startup
+internal class Startup
 {
   private readonly IWebHostEnvironment _webHostingEnvironment;
   private readonly IConfiguration _configuration;
@@ -28,6 +26,27 @@ public class Startup
   {
     _webHostingEnvironment = webHostingEnvironment;
     _configuration = configuration;
+  }
+
+  public static void Configure(IApplicationBuilder app)
+  {
+    app.MapDefaultEndpoints();
+
+    app.UseRequestTimeouts();
+    app.UseOutputCache();
+
+    app.UseAnonymousId();
+
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+      endpoints.MapControllers();
+      endpoints.MapContent();
+    });
   }
 
   public void ConfigureServices(IServiceCollection services)
@@ -74,11 +93,13 @@ public class Startup
         options.ClientId = Authentication.WebClientId;
         options.ClientSecret = Authentication.WebClientSecret;
         options.ResponseType = OpenIdConnectResponseType.Code;
+
         options.Scope.Clear();
         foreach (var scope in Authentication.WebClientScopes)
         {
           options.Scope.Add(scope);
         }
+
         options.MapInboundClaims = true;
         options.TokenValidationParameters.NameClaimType = ClaimTypes.NameIdentifier;
         options.SaveTokens = true;
@@ -94,27 +115,6 @@ public class Startup
         config.ConnectionString = _configuration.GetConnectionString(ServiceName.AzureStorageBlobs);
         config.ContainerName = ServiceName.AzureStorageBlobs;
       });
-  }
-
-  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-  {
-    app.MapDefaultEndpoints();
-
-    app.UseRequestTimeouts();
-    app.UseOutputCache();
-
-    app.UseAnonymousId();
-
-    app.UseStaticFiles();
-    app.UseRouting();
-    app.UseAuthentication();
-    app.UseAuthorization();
-
-    app.UseEndpoints(endpoints =>
-    {
-      endpoints.MapControllers();
-      endpoints.MapContent();
-    });
   }
 
   private static IAuthenticationService GetAuthenticationService(HttpContext httpContext)

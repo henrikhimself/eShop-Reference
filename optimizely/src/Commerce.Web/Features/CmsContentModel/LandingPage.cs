@@ -8,7 +8,7 @@ namespace Hj.Commerce.Features.CmsContentModel;
 [ContentType(
   DisplayName = "Landing Page",
   GUID = "c996e027-1ac1-4221-9f54-c7b8e1236f16")]
-public class LandingPage : SitePageBase
+internal class LandingPage : SitePageBase
 {
   [CultureSpecific]
   [Display(

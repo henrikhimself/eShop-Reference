@@ -1,4 +1,3 @@
-using Hj.Shared;
 using Microsoft.AspNetCore.Builder;
 
 namespace Hj.Shop;

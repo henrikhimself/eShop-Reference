@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace Hj.Commerce.Infrastructure.Authentication;
 
-public interface IAuthenticationService
+internal interface IAuthenticationService
 {
   Task OnValidatePrincipalAsync(CookieValidatePrincipalContext context);
 

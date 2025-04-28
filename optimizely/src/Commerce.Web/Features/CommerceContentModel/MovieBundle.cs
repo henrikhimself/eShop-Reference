@@ -7,6 +7,6 @@ namespace Hj.Commerce.Features.CommerceContentModel;
   DisplayName = "Bundle",
   GUID = "6225341c-ed52-41e7-acc3-436dc0661a1f",
   MetaClassName = nameof(MovieBundle))]
-public class MovieBundle : SiteBundleBase
+internal class MovieBundle : SiteBundleBase
 {
 }

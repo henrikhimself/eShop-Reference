@@ -1,14 +1,14 @@
 using System.Security.Claims;
 using EPiServer.Security;
 using Hj.Commerce.Features.Profile;
+using Hj.Common.Authentication;
 using Hj.ServiceClient.IdentityService;
-using Hj.Shared.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace Hj.Commerce.Infrastructure.Authentication;
 
-public class AuthenticationService : IAuthenticationService
+internal class AuthenticationService : IAuthenticationService
 {
   private readonly ISynchronizingUserService _synchronizingUserService;
   private readonly IIdentityServiceClient _identityServiceClient;
@@ -34,7 +34,7 @@ public class AuthenticationService : IAuthenticationService
   {
     var principal = context.Principal;
     if (principal == null
-      || principal?.Identity is not ClaimsIdentity identity)
+      || principal.Identity is not ClaimsIdentity identity)
     {
       return;
     }

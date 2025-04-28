@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Hj.Commerce</RootNamespace>
-    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
     <UserSecretsId>6f1ad105-b8c5-4af5-a985-8949122872b5</UserSecretsId>
   </PropertyGroup>
@@ -15,7 +13,7 @@
     <Using Include="EPiServer.DataAbstraction" />
     <Using Include="EPiServer.DataAnnotations" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="EPiServer.Azure" Version="11.2.1" />
     <PackageReference Include="EPiServer.Commerce" Version="14.35.0" />
@@ -24,12 +22,19 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Translations\**\*" />
+    <AdditionalFiles Include="BannedSymbols.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\shared\src\DataProtection.Lib\DataProtection.Lib.csproj" />
-    <ProjectReference Include="..\..\..\shared\src\MessagingAzure.Lib\MessagingAzure.Lib.csproj" />
-    <ProjectReference Include="..\..\..\shared\src\ServiceClient.Lib\ServiceClient.Lib.csproj" />
+    <ProjectReference Include="..\..\..\common\src\DataProtection.Lib\DataProtection.Lib.csproj" />
+    <ProjectReference Include="..\..\..\common\src\MessagingAzure.Lib\MessagingAzure.Lib.csproj" />
+    <ProjectReference Include="..\..\..\common\src\ServiceClient.Lib\ServiceClient.Lib.csproj" />
     <ProjectReference Include="..\Shop.ServiceDefaults\Shop.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 </Project>

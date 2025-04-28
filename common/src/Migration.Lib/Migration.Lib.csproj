@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Hj.Migration</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.24.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataProtection.Lib\DataProtection.Lib.csproj" />
+    <ProjectReference Include="..\IdentityServer.Lib\IdentityServer.Lib.csproj" />
+    <ProjectReference Include="..\Common.ServiceDefaults\Common.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>

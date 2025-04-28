@@ -1,3 +1,5 @@
+using Hj.Shop.Config;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Integrations
@@ -19,13 +21,13 @@ var azureServiceBus = builder
   .RunAsEmulator(emulator => emulator.WithConfiguration(AzureServiceBusConfig.Configure));
 
 // Resources
-var dataProtectionDb = sqlServer.AddDatabase(SharedServiceName.DataProtectionDb);
+var dataProtectionDb = sqlServer.AddDatabase(CommonServiceName.DataProtectionDb);
 var azureStorageBlobs = azureStorage.AddBlobs(ServiceName.AzureStorageBlobs);
 var cmsDb = sqlServer.AddDatabase("EPiServerDB", ServiceName.CommerceWebCmsDb);
 var commerceDb = sqlServer.AddDatabase("EcfSqlConnection", ServiceName.CommerceWebCommerceDb);
-var identityServerConfigurationDb = sqlServer.AddDatabase(SharedServiceName.IdentityServerConfigurationDb);
-var identityServerIdentityDb = sqlServer.AddDatabase(SharedServiceName.IdentityServerIdentityDb);
-var identityServerPersistedGrantDb = sqlServer.AddDatabase(SharedServiceName.IdentityServerPersistedGrantDb);
+var identityServerConfigurationDb = sqlServer.AddDatabase(CommonServiceName.IdentityServerConfigurationDb);
+var identityServerIdentityDb = sqlServer.AddDatabase(CommonServiceName.IdentityServerIdentityDb);
+var identityServerPersistedGrantDb = sqlServer.AddDatabase(CommonServiceName.IdentityServerPersistedGrantDb);
 
 // Projects
 var migrationApp = builder
@@ -34,7 +36,7 @@ var migrationApp = builder
   .WaitFor(sqlServer);
 
 var identityServerWeb = builder
-  .AddProjectWithDefaults<Projects.IdentityServer_Web>(SharedServiceName.IdentityServerWeb)
+  .AddProjectWithDefaults<Projects.IdentityServer_Web>(CommonServiceName.IdentityServerWeb)
   .AddEndpointWithDefaults(out var identityServerWebEndpoint, true)
   .WaitForCompletion(migrationApp);
 
@@ -44,12 +46,12 @@ var commerceWeb = builder
   .WaitForCompletion(migrationApp);
 
 var basketApi = builder
-  .AddProjectWithDefaults<Projects.Basket_Api>(SharedServiceName.BasketApi)
+  .AddProjectWithDefaults<Projects.Basket_Api>(CommonServiceName.BasketApi)
   .AddEndpointWithDefaults(out var basketApiEndpoint)
   .WaitForCompletion(migrationApp);
 
 var profileApi = builder
-  .AddProjectWithDefaults<Projects.Profile_Api>(SharedServiceName.ProfileApi)
+  .AddProjectWithDefaults<Projects.Profile_Api>(CommonServiceName.ProfileApi)
   .AddEndpointWithDefaults(out var profileApiEndpoint)
   .WaitForCompletion(migrationApp);
 
@@ -99,4 +101,5 @@ shop1Web
   .WithReference(basketApiEndpoint)
   .WithReference(profileApiEndpoint);
 
-builder.Build().Run();
+var app = builder.Build();
+await app.RunAsync();

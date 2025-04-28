@@ -1,5 +1,3 @@
-using Hj.Shop;
-
 namespace Hj.Migration;
 
 internal sealed class CommerceResource

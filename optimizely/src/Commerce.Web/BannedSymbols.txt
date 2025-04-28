@@ -1,0 +1,3 @@
+﻿T:EPiServer.Core.IContentLanguageAccessor
+T:EPiServer.Security.IPrincipalAccessor
+T:Microsoft.AspNetCore.Http.IHttpContextAccessor

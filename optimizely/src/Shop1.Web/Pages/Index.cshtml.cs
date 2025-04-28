@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Hj.Shop1.Pages;
 
-public class IndexModel : PageModel
+internal sealed class Index : PageModel
 {
-  public void OnGet()
+  public static void OnGet()
   {
+    // noop
   }
 }

@@ -1,0 +1,13 @@
+﻿@page
+@model Hj.IdentityServer.Pages.Account.Logout.LoggedOut
+
+@section meta {
+  @if (Model.PostLogoutRedirectUri != null)
+  {
+    <meta http-equiv="refresh" content="2;url=@Model.PostLogoutRedirectUri">
+  }
+}
+
+<p>
+  You have been logged out.
+</p>

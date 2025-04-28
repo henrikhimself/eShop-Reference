@@ -1,6 +1,4 @@
-using Hj.Shared;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Hj.Shop;

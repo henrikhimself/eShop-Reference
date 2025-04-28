@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Hj.Commerce.Features.CommerceContentModel.BaseContent;
 
-public abstract class SiteVariationBase
+internal abstract class SiteVariationBase
 {
   [CultureSpecific]
   [Display(

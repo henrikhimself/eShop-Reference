@@ -7,6 +7,6 @@ namespace Hj.Commerce.Features.CommerceContentModel;
   DisplayName = "Director",
   GUID = "e81b514e-7ba5-430f-9075-94aeedd1c3f5",
   MetaClassName = nameof(MovieDirectorCategory))]
-public class MovieDirectorCategory : SiteNodeBase
+internal class MovieDirectorCategory : SiteNodeBase
 {
 }

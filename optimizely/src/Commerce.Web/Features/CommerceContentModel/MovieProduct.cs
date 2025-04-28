@@ -10,7 +10,7 @@ namespace Hj.Commerce.Features.CommerceContentModel;
   DisplayName = "Movie",
   GUID = "e9e0b060-1bc8-46a4-86ea-7ad68de19c4c",
   MetaClassName = nameof(MovieProduct))]
-public class MovieProduct : SiteProductBase
+internal class MovieProduct : SiteProductBase
 {
   [CultureSpecific]
   [Display(

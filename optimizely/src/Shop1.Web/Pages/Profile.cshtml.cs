@@ -1,6 +1,6 @@
 using System.Security.Claims;
+using Hj.Common.Authentication;
 using Hj.ServiceClient.Profile;
-using Hj.Shared.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace Hj.Shop1.Pages;
 
 [Authorize]
-public class ProfileModel : PageModel
+internal sealed class Profile : PageModel
 {
   private readonly IProfileClientV1 _profileClientV1;
 
-  public ProfileModel(IProfileClientV1 profileClientV1) => _profileClientV1 = profileClientV1;
+  public Profile(IProfileClientV1 profileClientV1) => _profileClientV1 = profileClientV1;
 
   public List<string>? Identity { get; set; }
 
-  public ProfileOutputDto? Profile { get; set; }
+  public ProfileOutputDto? ProfileDto { get; set; }
 
   public async Task<IActionResult> OnGetAsync()
   {
@@ -39,7 +39,7 @@ public class ProfileModel : PageModel
 
     // Get using profile service.
     _profileClientV1.Credential = User.GetCredential();
-    Profile = (await _profileClientV1.ProfileAsync()).Profile;
+    ProfileDto = (await _profileClientV1.ProfileAsync()).Profile;
 
     return Page();
   }

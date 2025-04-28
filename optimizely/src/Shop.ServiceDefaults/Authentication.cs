@@ -1,10 +1,16 @@
-using Hj.Shared;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Hj.Shop;
 
 public static class Authentication
 {
+  // Optimizely roles
+  public const string RoleWebEditors = "WebEditors";
+  public const string RoleWebAdmins = "WebAdmins";
+  public const string RoleCommerceSettingsAdmins = "CommerceSettingsAdmins";
+  public const string RoleCatalogManagers = "CatalogManagers";
+  public const string RoleCommerceAdmins = "CommerceAdmins";
+
   // OpenID Connect client
   public const string WebClientId = "web";
   public const string WebClientSecret = "73C45B22-1850-6729-8AF4-37ADE40C52B7";
@@ -12,14 +18,7 @@ public static class Authentication
     OpenIdConnectScope.OfflineAccess,
     OpenIdConnectScope.OpenId,
     OpenIdConnectScope.Email,
-    SharedAuthentication.IdentityResource_Role,
-    SharedAuthentication.BasketApiScope,
-    SharedAuthentication.ProfileApiScope];
-
-  // Optimizely roles
-  public const string Role_WebEditors = "WebEditors";
-  public const string Role_WebAdmins = "WebAdmins";
-  public const string Role_CommerceSettingsAdmins = "CommerceSettingsAdmins";
-  public const string Role_CatalogManagers = "CatalogManagers";
-  public const string Role_CommerceAdmins = "CommerceAdmins";
+    CommonAuthentication.IdentityResourceRole,
+    CommonAuthentication.BasketApiScope,
+    CommonAuthentication.ProfileApiScope];
 }

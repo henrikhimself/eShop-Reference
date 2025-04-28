@@ -2,21 +2,18 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Hj.Migration</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UserSecretsId>7ac67a5b-1385-4c0c-a814-8d88fdc33308</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Using Include="Microsoft.Extensions.Configuration" />
-    <Using Include="Microsoft.Extensions.DependencyInjection" />
     <Using Include="Microsoft.Extensions.Hosting" />
-    <Using Include="Hj.Migration" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\shared\src\Migration.Lib\Migration.Lib.csproj" />
+    <ProjectReference Include="..\..\..\common\src\Migration.Lib\Migration.Lib.csproj" />
     <ProjectReference Include="..\Shop.ServiceDefaults\Shop.ServiceDefaults.csproj" />
   </ItemGroup>
 </Project>
