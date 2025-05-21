@@ -60,6 +60,11 @@ var shop1Web = builder
   .AddEndpointWithDefaults(out var shop1WebEndpoint)
   .WaitForCompletion(migrationApp);
 
+var reverseProxyWeb = builder
+  .AddProjectWithDefaults<Projects.ReverseProxy_Web>(ServiceName.ReverseProxyWeb)
+  .WithHttpsEndpoint(port: 13370)
+  .WithExternalHttpEndpoints();
+
 // References
 migrationApp
   .WithReference(azureStorageBlobs)
@@ -67,6 +72,9 @@ migrationApp
   .WithReference(commerceWebEndpoint)
   .WithReference(basketApiEndpoint)
   .WithReference(profileApiEndpoint)
+  .WithReference(shop1WebEndpoint);
+
+reverseProxyWeb
   .WithReference(shop1WebEndpoint);
 
 identityServerWeb

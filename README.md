@@ -1,1 +1,1 @@
-# Reference implementations for an eCommerce site.
+# An eShop Reference Site.

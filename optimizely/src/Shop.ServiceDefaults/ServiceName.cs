@@ -17,6 +17,8 @@ public static class ServiceName
 
   public const string MigrationApp = "migration-app";
 
+  public const string ReverseProxyWeb = "reverse-proxy-web";
+
   public const string CommerceWeb = "commerce-web";
   public const string CommerceWebCmsDb = $"{CommerceWeb}-db-cms";
   public const string CommerceWebCommerceDb = $"{CommerceWeb}-db-commerce";

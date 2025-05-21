@@ -26,6 +26,8 @@ public static class CommonServiceDefaults
 
     services.AddServiceDiscovery();
 
+    services.AddHttpForwarderWithServiceDiscovery();
+
     services.ConfigureHttpClientDefaults(http =>
     {
       http.AddStandardResilienceHandler();
